@@ -32,6 +32,8 @@ const express = require('express')
 const fs = require('fs')
 const morgan = require('morgan')
 
+const db = require("./database.js")
+
 const app = express();
 app.use(morgan('tiny'));
 
