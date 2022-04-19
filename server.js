@@ -32,7 +32,8 @@ const express = require('express');
 const fs = require('fs');
 const morgan = require('morgan');
 
-const db = require("./database.js");
+const Database = require('better-sqlite3/lib/database');
+const db = new Database('user.db');
 
 const app = express();
 app.use(morgan('tiny'));
