@@ -39,6 +39,13 @@ const server = app.listen(port, () => {
     console.log('App listening on port %PORT%'.replace('%PORT%', port))
 });
 
+if (args.log == true) {
+    const WRITESTREAM = fs.createWriteStream('FILE', { flags: 'a' });
+    app.use(morgan('FORMAT', { stream: WRITESTREAM }));
+} else {
+    console.log("Error: not creating the log file")
+}
+
 // coin code
 
 function coinFlip() {
