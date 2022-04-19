@@ -28,11 +28,11 @@ if (args.help || args.h) {
 args['port']
 const port = args.port || process.env.PORT || 5000
 
-const express = require('express')
-const fs = require('fs')
-const morgan = require('morgan')
+const express = require('express');
+const fs = require('fs');
+const morgan = require('morgan');
 
-const db = require("./database.js")
+const db = require("./database.js");
 
 const app = express();
 app.use(morgan('tiny'));
