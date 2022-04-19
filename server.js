@@ -14,6 +14,55 @@ const server = app.listen(port, () => {
     console.log('App listening on port %PORT%'.replace('%PORT%', port))
 });
 
+// coin code
+
+function coinFlip() {
+    var flip = Math.random();
+    var result;
+    if (flip < 0.5) {
+        result = "heads"
+    } else {
+        result = "tails";
+    }
+    return result;
+}
+
+function coinFlips(flips) {
+    var flipList = new Array();
+    for (var i = 0; i < flips; i++) {
+        flipList.push(coinFlip());
+    }
+    return flipList;
+}
+
+function countFlips(array) {
+    var headCount = 0;
+    var tailsCount = 0;
+    var index = 0;
+    while (index < array.length) {
+        if (array[index] == "heads") {
+            headCount = headCount + 1;
+        } else {
+            tailsCount = tailsCount + 1;
+        }
+        index++;
+
+    }
+    return { tails: tailsCount, heads: headCount }
+}
+
+export function flipACoin(call) {
+    var flip = coinFlip();
+    var result;
+    if (flip == call) {
+        result = "win";
+    } else {
+        result = "lose";
+    }
+    return { call: call, flip: flip, result: result }
+}
+
+
 app.get('/app/', (req, res) => {
     res.statusCode = 200;
     res.statusMessage = 'OK';
