@@ -51,7 +51,7 @@ function countFlips(array) {
     return { tails: tailsCount, heads: headCount }
 }
 
-export function flipACoin(call) {
+function flipACoin(call) {
     var flip = coinFlip();
     var result;
     if (flip == call) {
