@@ -1,7 +1,7 @@
 "use strict";
 
 const database = require('better-sqlite3');
-const logb = new database('log.db')
+const db = new database('log.db')
 
 const stmt = db.prepare(`SELECT name FROM sqlite_master WHERE type='
     table ' and name='
@@ -29,4 +29,4 @@ if (row == undefined) {
 } else {
     console.log('Database here')
 }
-module.exports(logdb)
+module.exports(db)
