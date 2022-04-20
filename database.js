@@ -24,7 +24,7 @@ if (row == undefined) {
         referrer VARCHAR,
         useragent VARCHAR
     ); `
-    logb.exec(sqlInit);
+    db.exec(sqlInit);
     console.log("Database created");
 } else {
     console.log('Database here')
