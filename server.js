@@ -33,8 +33,8 @@ const fs = require('fs');
 const morgan = require('morgan');
 
 const db = require('./database.js');
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+//app.use(express.urlencoded({ extended: true }));
+//app.use(express.json());
 
 const app = express();
 app.use(morgan('tiny'));
