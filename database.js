@@ -29,4 +29,4 @@ if (row == undefined) {
 } else {
     console.log('Database here')
 }
-module.exports(db)
+module.exports = db;
