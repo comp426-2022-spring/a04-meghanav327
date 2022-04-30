@@ -1,5 +1,3 @@
-"use strict";
-
 const database = require('better-sqlite3');
 const db = new database('log.db')
 
