@@ -43,8 +43,8 @@ const server = app.listen(port, () => {
 });
 
 if (args.log == true) {
-    const WRITESTREAM = fs.createWriteStream('FILE', { flags: 'a' });
-    app.use(morgan('FORMAT', { stream: WRITESTREAM }));
+    const access = fs.createWriteStream('access.log', { flags: 'a' });
+    app.use(morgan('combined', { stream: access }));
 } else {
     console.log("Error: not creating the log file")
 }
@@ -62,7 +62,7 @@ app.use((req, res, next) => {
         referer: req.headers['referer'],
         useragent: req.headers['user-agent']
     };
-
+    console.log(logdata)
     const stmt = db.prepare(
         "INSERT INTO accesslog (remoteaddr, remoteuser, time, method, url, protocol, httpversion, status, referer, useragent) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
     );
@@ -131,7 +131,7 @@ function flipACoin(call) {
     return { call: call, flip: flip, result: result }
 }
 
-if (args.debug) {
+if (args.debug || args.d) {
     app.get('/app/log/access/', (req, res, next) => {
         const stmt = db.prepare("SELECT * FROM accesslog").all();
         res.status(200).json(stmt);
@@ -178,5 +178,5 @@ app.get('/app/flip/call/tails/', (req, res) => {
 
 
 app.use(function(req, res) {
-    res.status(404).send('404 NOT FOUND')
+    res.status(404).send('404 NOT FOUND');
 });
