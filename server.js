@@ -165,12 +165,12 @@ app.get('/app/flip/call/tails/', (req, res) => {
 });
 
 if (args.debug || args.d) {
-    app.get('/app/log/access/', (req, res, next) => {
+    app.get('/app/log/access/', (req, res) => {
         const stmt = db.prepare("SELECT * FROM accesslog").all();
         res.status(200).json(stmt);
     })
 
-    app.get('/app/error/', (req, res, next) => {
+    app.get('/app/error/', (req, res) => {
         throw new Error('Error test is successful.')
     })
 }
