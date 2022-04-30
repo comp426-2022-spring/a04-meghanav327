@@ -25,21 +25,22 @@ if (args.help || args.h) {
     process.exit(0)
 }
 
-var express = require('express')
-const fs = require('fs');
-const morgan = require('morgan');
-
-const db = require('./database.js');
-
-const port = args.port || process.env.PORT || 5000
-
+var express = require("express")
 var app = express()
+
+const fs = require('fs')
+
+const morgan = require('morgan')
+
+const db = require('./database.js')
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+const port = args.port || args.p || 5000
 
 const server = app.listen(port, () => {
-    console.log('App listening on port %PORT%'.replace('%PORT%', port))
+    console.log("Server running on port %PORT%".replace("%PORT%", port))
 });
 
 if (args.log == 'false') {
