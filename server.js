@@ -31,7 +31,7 @@ const morgan = require('morgan');
 
 const db = require('./database.js');
 
-const port = args.port || 5000
+const port = args.port || process.env.PORT || 5000
 
 var app = express();
 app.use(express.urlencoded({ extended: true }));
@@ -42,7 +42,7 @@ const server = app.listen(port, () => {
     console.log('App listening on port %PORT%'.replace('%PORT%', port))
 });
 
-if (args.log == true) {
+if (args.log == 'true') {
     const WRITESTREAM = fs.createWriteStream('FILE', { flags: 'a' })
     app.use(morgan('FORMAT', { stream: WRITESTREAM }))
 } else {
