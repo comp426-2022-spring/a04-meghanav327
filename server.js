@@ -154,13 +154,5 @@ if (args.debug || args.d) {
 }
 
 app.use(function(req, res) {
-    const statusCode = 404
-    const statusMessage = 'NOT FOUND'
-    res.status(statusCode).end(statusCode + ' ' + statusMessage)
-});
-
-process.on('SIGINT', () => {
-    server.close(() => {
-        console.log('\nApp stopped.');
-    });
+    res.status(404).send('404 NOT FOUND');
 });
