@@ -25,19 +25,18 @@ if (args.help || args.h) {
     process.exit(0)
 }
 
-args['port']
-const port = args.port || process.env.PORT || 5000
-
-const express = require('express');
+var express = require('express');
 const fs = require('fs');
 const morgan = require('morgan');
 
 const db = require('./database.js');
-//app.use(express.urlencoded({ extended: true }));
-//app.use(express.json());
 
-const app = express();
-app.use(morgan('tiny'));
+const port = args.port || 5000
+
+var app = express();
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
 
 const server = app.listen(port, () => {
     console.log('App listening on port %PORT%'.replace('%PORT%', port))
