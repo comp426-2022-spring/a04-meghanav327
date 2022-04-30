@@ -131,20 +131,20 @@ function flipACoin(call) {
     return { call: call, flip: flip, result: result }
 }
 
-app.get('/app/', (req, res) => {
+app.get('/app/', (req, res, next) => {
     res.statusCode = 200;
     res.statusMessage = 'OK';
     res.writeHead(res.statusCode, { 'Content-Type': 'text/plain' });
     res.end(res.statusCode + ' ' + res.statusMessage)
 });
 
-app.get('/app/flip', (req, res) => {
+app.get('/app/flip', (req, res, next) => {
     res.status(200);
     res.type('text/plain')
     res.json({ 'flip': coinFlip() })
 });
 
-app.get('/app/flips/:number/', (req, res) => {
+app.get('/app/flips/:number/', (req, res, next) => {
     res.status(200);
     var flips = req.params.number;
     var results = coinFlips(flips)
@@ -154,12 +154,12 @@ app.get('/app/flips/:number/', (req, res) => {
     })
 });
 
-app.get('/app/flip/call/heads/', (req, res) => {
+app.get('/app/flip/call/heads/', (req, res, next) => {
     res.status(200);
     res.json(flipACoin('heads'));
 });
 
-app.get('/app/flip/call/tails/', (req, res) => {
+app.get('/app/flip/call/tails/', (req, res, next) => {
     res.status(200);
     res.json(flipACoin('tails'));
 });
