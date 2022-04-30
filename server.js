@@ -43,8 +43,8 @@ const server = app.listen(port, () => {
 });
 
 if (args.log == true) {
-    const access = fs.createWriteStream('access.log', { flags: 'a' });
-    app.use(morgan('combined', { stream: access }));
+    const WRITESTREAM = fs.createWriteStream('FILE', { flags: 'a' })
+    app.use(morgan('FORMAT', { stream: WRITESTREAM }))
 } else {
     console.log("Error: not creating the log file")
 }
@@ -131,18 +131,6 @@ function flipACoin(call) {
     return { call: call, flip: flip, result: result }
 }
 
-if (args.debug || args.d) {
-    app.get('/app/log/access/', (req, res, next) => {
-        const stmt = db.prepare("SELECT * FROM accesslog").all();
-        res.status(200).json(stmt);
-    })
-
-    app.get('/app/error/', (req, res, next) => {
-        throw new Error('Error test is successful.')
-    })
-}
-
-
 app.get('/app/', (req, res) => {
     res.statusCode = 200;
     res.statusMessage = 'OK';
@@ -176,6 +164,16 @@ app.get('/app/flip/call/tails/', (req, res) => {
     res.json(flipACoin('tails'));
 });
 
+if (args.debug || args.d) {
+    app.get('/app/log/access/', (req, res, next) => {
+        const stmt = db.prepare("SELECT * FROM accesslog").all();
+        res.status(200).json(stmt);
+    })
+
+    app.get('/app/error/', (req, res, next) => {
+        throw new Error('Error test is successful.')
+    })
+}
 
 app.use(function(req, res) {
     res.status(404).send('404 NOT FOUND');
